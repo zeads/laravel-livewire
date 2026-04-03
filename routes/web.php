@@ -8,3 +8,5 @@ Route::get('/', function () {
 
 // Route::livewire('/post/create', 'pages::post.create');
 Route::livewire('/post/create', 'pages::post.create');
+Route::livewire('/counter', 'counter');
+Route::livewire('/users', 'users');
