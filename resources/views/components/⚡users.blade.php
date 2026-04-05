@@ -38,6 +38,9 @@ new class extends Component
         // $this->reset(['name', 'email', 'password']);
         $this->reset();
 
+        session()->flash('success', 'User created successfully.');
+
+
     }
 };
 ?>
@@ -49,6 +52,12 @@ new class extends Component
     <hr class="my-5"> --}}
 
     <div class="my-5" >
+        @if(@session('success'))
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-base bg-green-50" role="alert">
+                <span class="font-medium">Success!</span> {{ session('success') }}
+            </div>
+        @endif
+
         <div class="mx-auto">
             <form wire:submit.prevent="addUser" action="#" method="POST" class="space-y-6">
                 <div>
