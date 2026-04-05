@@ -2,11 +2,17 @@
 
 use Livewire\Component;
 use App\Models\User;
+use Livewire\Attributes\Validate;
 
 new class extends Component
 {
+    #[Validate('required|min:3|max:255')]
     public string $name = '';
+
+    #[Validate('required|email:dns|unique:users,email')]
     public string $email = '';
+
+    #[Validate('required|min:3|max:255')]
     public string $password = '';
 
     public function userCount()
@@ -21,6 +27,7 @@ new class extends Component
 
     public function addUser()
     {
+        $this->validate();
         // User::factory()->create();
         User::create([
             'name' => $this->name,
@@ -49,13 +56,19 @@ new class extends Component
                     <div class="mt-2">
                     <input wire:model="name" id="name" type="text" name="name"  autocomplete="name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                     </div>
+                    @error('name')
+                        <p class="mt-2.5 text-xs text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
                     <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
                     <div class="mt-2">
-                    <input wire:model="email" id="email" type="email" name="email" required autocomplete="email" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                    <input wire:model="email" id="email" type="email" name="email"  autocomplete="email" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                     </div>
+                    @error('email')
+                        <p class="mt-2.5 text-xs text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
@@ -63,12 +76,15 @@ new class extends Component
                     <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
                     </div>
                     <div class="mt-2">
-                    <input wire:model="password" id="password" type="password" name="password" required autocomplete="current-password" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                    <input wire:model="password" id="password" type="password" name="password"  autocomplete="current-password" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                     </div>
+                    @error('password')
+                        <p class="mt-2.5 text-xs text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
-                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create new user</button>
                 </div>
             </form>
         </div>
