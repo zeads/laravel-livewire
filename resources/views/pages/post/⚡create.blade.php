@@ -19,19 +19,19 @@ new class extends Component
 
 <div>
     {{-- Because you are alive, everything is possible. - Thich Nhat Hanh --}}
-    <form wire:submit="save">
+    <form wire:submit="save" class="flex flex-col gap-1 w-1/2">
         <label>
             Title
-            <input type="text" wire:model="title">
+            <input type="text" wire:model="title" class="border rounded-xl">
             @error('title') <span style="color: red;">{{ $message }}</span> @enderror
         </label>
 
         <label>
             Content
-            <textarea wire:model="content" rows="5"></textarea>
+            <textarea wire:model="content" rows="5" class="border rounded-xl"></textarea>
             @error('content') <span style="color: red;">{{ $message }}</span> @enderror
         </label>
 
-        <button type="submit">Save Post</button>
+        <button type="submit" class="text-white bg-blue-500 rounded-xl px-5 py-2.5 cursor-pointer hover:bg-blue-600">Save Post</button>
     </form>
 </div>
